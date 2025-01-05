@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/xp.css" />
+    <link rel="stylesheet" href="stars.css" />
+    <script src="index.js"></script>
+    <title>klmsk.dev</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body,
+      html {
+        box-sizing: border-box;
+        color: #000000;
+        font-family: 'Times New Roman', serif;
+        height: 100%;
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      html {
+        background-attachment: fixed;
+        background-image: url(assets/bliss-night.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      ::selection {
+        background: #3399ff;
+      }
+
+      .content {
+        height: calc(100% - 23px);
+      }
+
+      .window {
+        z-index: 10;
+        height: 100%;
+      }
+
+      .window-body {
+        padding: 12px;
+        font-size: 0.875rem;
+        height: calc(100% - 46px);
+      }
+
+      .tab-panel {
+        max-height: calc(100% - 23px);
+        overflow: auto;
+      }
+
+      .taskbar {
+        background-image: url(assets/xptaskbar.gif);
+        background-repeat: repeat-x;
+        width: 100%;
+        margin-top: auto;
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .start-btn {
+        background-image: url(assets/start.webp);
+        border: none;
+        padding: 0;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .resize-handle {
+        position: absolute;
+        background: transparent;
+      }
+
+      .resize-handle.top {
+        cursor: n-resize;
+        height: 5px;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+
+      .resize-handle.right {
+        bottom: 0;
+        cursor: e-resize;
+        right: 0;
+        top: 0;
+        width: 5px;
+      }
+
+      .resize-handle.bottom {
+        bottom: 0;
+        cursor: s-resize;
+        height: 5px;
+        left: 0;
+        right: 0;
+      }
+
+      .resize-handle.left {
+        bottom: 0;
+        cursor: w-resize;
+        left: 0;
+        top: 0;
+        width: 5px;
+      }
+
+      @media (min-width: 768px) {
+        .window {
+          cursor: default;
+          height: 55vh;
+          margin-bottom: 100px;
+          min-height: 200px;
+          min-width: 300px;
+          position: absolute;
+          width: 35vw;
+        }
+
+        .window.resizing {
+          user-select: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="stars">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </section>
+    <section class="content">
+      <div class="window">
+        <div class="title-bar" style="padding: 14px 4px">
+          <span class="title-bar-text">klmsk.dev</span>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <section class="tabs" style="height: 100%">
+            <menu role="tablist" aria-label="Tabs">
+              <button role="tab" aria-selected="true" aria-controls="index">Home</button>
+              <button role="tab" aria-controls="experience">Experience</button>
+            </menu>
+            <article role="tabpanel" id="index" class="tab-panel">
+              <h2>Kevin Kliimask</h2>
+              <br />
+              <p>Full-stack web developer • Former CTO at a fintech startup • Tinkerer</p>
+              <br />
+              <p>Passionate about crafting elegant solutions while leveraging cutting-edge technologies.</p>
+              <br />
+              <p><strong>Location: </strong>Tallinn, Estonia</p>
+              <br />
+              <div style="display: flex; gap: 8px">
+                <a href="mailto:kevin@klmsk.com" title="kevin@klmsk.com">Email</a>
+                <a href="https://x.com/kasperski87" target="_blank">Twitter</a>
+                <a href="https://github.com/kevinkliimask" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/kevin-kliimask-6a9048226" target="_blank">LinkedIn</a>
+              </div>
+              <br />
+              <img src="assets/banner.gif" alt="Banner" />
+            </article>
+            <!-- <h2>Interests</h2>
+            <br />
+            <ul style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 20px">
+              <li>Artificial Intelligence</li>
+              <li>Blockchain Technology</li>
+              <li>Retro Computing</li>
+              <li>Open Source Contribution</li>
+            </ul> -->
+            <article role="tabpanel" hidden="true" id="experience" class="tab-panel">
+              <h2>Experience</h2>
+              <br />
+              <div>
+                <button id="download">Download CV</button>
+              </div>
+              <br />
+              <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 8px">Tenlion (November 2024 - Present)</h3>
+                <ul style="margin-left: 16px">
+                  <li>Custom tools, scripts and bots for crypto and stock market activities</li>
+                  <li>Building a prediction market based on SUI blockchain</li>
+                </ul>
+              </div>
+              <br />
+              <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 8px">Investonian (February 2024 - January 2025)</h3>
+                <ul style="margin-left: 16px">
+                  <li>Goals was to build the next generation investment analysis platform for retail investors</li>
+                  <li>Started as an early-stage employee and took on the role of CTO later on</li>
+                  <li>
+                    Led a team of 3 developers, made architectural decisions, managed devops and infrastructure, and
+                    worked on the product
+                  </li>
+                  <li>
+                    <a href="https://investonian.com" target="_blank">investonian.com</a>
+                  </li>
+                </ul>
+              </div>
+              <br />
+              <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 8px">CGI (July 2023 - August 2023)</h3>
+                <ul style="margin-left: 16px">
+                  <li>Internship</li>
+                  <li>Built an internal web application for the Estonian Weather Service</li>
+                  <li>Worked alongside a team of 4 interns, 2 mentors and 1 product owner</li>
+                </ul>
+              </div>
+              <br />
+              <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 8px">Devtailor (June 2022 - May 2023)</h3>
+                <ul style="margin-left: 16px">
+                  <li>Started as an intern and continued as a part-time junior developer</li>
+                  <li>Worked on 2 projects:</li>
+                  <ul style="margin-left: 8px">
+                    <li>Fingate - cryptocurrency trading platform. Helped build the web application.</li>
+                    <li>
+                      Sportscientia - a platform for sports science and performance analysis. Worked on an internal
+                      admin dashboard and a mobile app
+                    </li>
+                  </ul>
+                </ul>
+              </div>
+            </article>
+          </section>
+          <br />
+          <br />
+        </div>
+        <div class="resize-handle top"></div>
+        <div class="resize-handle right"></div>
+        <div class="resize-handle bottom"></div>
+        <div class="resize-handle left"></div>
+      </div>
+    </section>
+    <div class="taskbar">
+      <button class="start-btn" onclick="toggleStartMenu()"></button>
+    </div>
+  </body>
+</html>
