@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "serve -s ."
+    "dev": "serve -s dist",
+    "build": "node build.js"
   },
   "author": "",
   "license": "ISC",
