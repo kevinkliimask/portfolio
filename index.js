@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
     yOffset = (contentRect.height - window.offsetHeight) / 2;
 
     window.style.position = 'absolute';
-    window.style.left = '0';
-    window.style.top = '0';
+    window.style.left = 0;
+    window.style.top = 0;
     window.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
 
     // Add drag event listeners
@@ -178,8 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
         xOffset = Math.min(Math.max(newX, minX), maxX);
         yOffset = Math.min(Math.max(newY, minY), maxY);
 
-        window.style.left = '0';
-        window.style.top = '0';
+        window.style.left = 0;
+        window.style.top = 0;
         window.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
       }
     }

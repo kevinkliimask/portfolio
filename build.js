@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Define your routes
-const routes = ['experience']; // Add new routes here as needed
+const routes = ['experience'];
 
 // Create dist directory if it doesn't exist
 const distPath = path.join(__dirname, 'dist');
@@ -16,6 +15,7 @@ const staticAssets = [
   'index.js',
   'stars.css',
   'cv-kevin-kliimask.pdf',
+  'favicon.ico',
 ];
 
 // Copy assets folder
@@ -52,7 +52,7 @@ routes.forEach(route => {
   }
 
   // Create index.html with adjusted paths
-  let routeContent = indexContent.replace(/href="(?!http|\/\/)(.*?)"/g, 'href="../$1"')
+  let routeContent = indexContent.replace(/href="(?!http|\/\/|mailto:)(.*?)"/g, 'href="../$1"')
                                 .replace(/src="(?!http|\/\/)(.*?)"/g, 'src="../$1"')
                                 .replace(/url\((.*?)\)/g, 'url(../$1)');
 
@@ -86,7 +86,6 @@ routes.forEach(route => {
     </script>
   `;
 
-  // Insert the script right before the closing </body> tag
   routeContent = routeContent.replace('</body>', `${scriptToInject}\n</body>`);
 
   fs.writeFileSync(path.join(routePath, 'index.html'), routeContent);
