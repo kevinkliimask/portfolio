@@ -10,7 +10,7 @@
     <meta property="og:title" content="klmsk.dev" />
     <meta property="og:description" content="Kevin Kliimask's portfolio" />
     <title>klmsk.dev</title>
-    <script src="index.js"></script>
+    <script src="index.js" type="module"></script>
     <style>
       * {
         box-sizing: border-box;
@@ -119,6 +119,38 @@
         left: 0;
         top: 0;
         width: 5px;
+      }
+
+      .resize-handle.top-left {
+        cursor: nw-resize;
+        height: 10px;
+        left: 0;
+        top: 0;
+        width: 10px;
+      }
+
+      .resize-handle.top-right {
+        cursor: ne-resize;
+        height: 10px;
+        right: 0;
+        top: 0;
+        width: 10px;
+      }
+
+      .resize-handle.bottom-right {
+        cursor: se-resize;
+        height: 10px;
+        right: 0;
+        bottom: 0;
+        width: 10px;
+      }
+
+      .resize-handle.bottom-left {
+        cursor: sw-resize;
+        height: 10px;
+        left: 0;
+        bottom: 0;
+        width: 10px;
       }
 
       @media (min-width: 768px) {
@@ -256,6 +288,10 @@
         <div class="resize-handle right"></div>
         <div class="resize-handle bottom"></div>
         <div class="resize-handle left"></div>
+        <div class="resize-handle top-left"></div>
+        <div class="resize-handle top-right"></div>
+        <div class="resize-handle bottom-right"></div>
+        <div class="resize-handle bottom-left"></div>
       </div>
     </section>
     <div class="taskbar">
