@@ -108,13 +108,15 @@ function initializeWindowControls(window, titleBar, content) {
     const deltaX = e.clientX - initialX;
     const deltaY = e.clientY - initialY;
 
-    switch (resizeDirection) {
-      case 'left': {
-        const proposedWidth = initialWidth - deltaX;
-        if (proposedWidth < 300) {
-          newWidth = 300;
-          newX = windowRect.right - 300 - contentRect.left;
-        } else {
+    const handleWidth = (isLeft) => {
+      const delta = isLeft ? -deltaX : deltaX;
+      const proposedWidth = initialWidth + delta;
+
+      if (proposedWidth < 300) {
+        newWidth = 300;
+        if (isLeft) newX = windowRect.right - 300 - contentRect.left;
+      } else {
+        if (isLeft) {
           const proposedX = windowRect.right - proposedWidth - contentRect.left;
           if (proposedX < 0) {
             newWidth = windowRect.right - contentRect.left;
@@ -123,22 +125,24 @@ function initializeWindowControls(window, titleBar, content) {
             newWidth = proposedWidth;
             newX = proposedX;
           }
-        }
-        break;
-      }
-      case 'right': {
-        newWidth = Math.max(300, initialWidth + deltaX);
-        if (windowRect.left + newWidth > contentRect.right) {
-          newWidth = contentRect.right - windowRect.left;
-        }
-        break;
-      }
-      case 'top': {
-        const proposedHeight = initialHeight - deltaY;
-        if (proposedHeight < 200) {
-          newHeight = 200;
-          newY = windowRect.bottom - 200 - contentRect.top;
         } else {
+          newWidth = proposedWidth;
+          if (windowRect.left + newWidth > contentRect.right) {
+            newWidth = contentRect.right - windowRect.left;
+          }
+        }
+      }
+    };
+
+    const handleHeight = (isTop) => {
+      const delta = isTop ? -deltaY : deltaY;
+      const proposedHeight = initialHeight + delta;
+
+      if (proposedHeight < 200) {
+        newHeight = 200;
+        if (isTop) newY = windowRect.bottom - 200 - contentRect.top;
+      } else {
+        if (isTop) {
           const proposedY = windowRect.bottom - proposedHeight - contentRect.top;
           if (proposedY < 0) {
             newHeight = windowRect.bottom - contentRect.top;
@@ -147,117 +151,20 @@ function initializeWindowControls(window, titleBar, content) {
             newHeight = proposedHeight;
             newY = proposedY;
           }
-        }
-        break;
-      }
-      case 'bottom': {
-        newHeight = Math.max(200, initialHeight + deltaY);
-        if (windowRect.top + newHeight > contentRect.bottom) {
-          newHeight = contentRect.bottom - windowRect.top;
-        }
-        break;
-      }
-      case 'top-left': {
-        // Handle width (left side)
-        const proposedWidth = initialWidth - deltaX;
-        if (proposedWidth >= 300) {
-          const proposedX = windowRect.right - proposedWidth - contentRect.left;
-          // Check if we would hit the left boundary
-          if (proposedX < 0) {
-            newWidth = windowRect.right - contentRect.left;
-            newX = 0;
-          } else {
-            newWidth = proposedWidth;
-            newX = proposedX;
-          }
         } else {
-          newWidth = 300;
-          newX = windowRect.right - 300 - contentRect.left;
-        }
-
-        // Handle height (top side)
-        const proposedHeight = initialHeight - deltaY;
-        if (proposedHeight >= 200) {
-          const proposedY = windowRect.bottom - proposedHeight - contentRect.top;
-          // Check if we would hit the top boundary
-          if (proposedY < 0) {
-            newHeight = windowRect.bottom - contentRect.top;
-            newY = 0;
-          } else {
-            newHeight = proposedHeight;
-            newY = proposedY;
+          newHeight = proposedHeight;
+          if (windowRect.top + newHeight > contentRect.bottom) {
+            newHeight = contentRect.bottom - windowRect.top;
           }
-        } else {
-          newHeight = 200;
-          newY = windowRect.bottom - 200 - contentRect.top;
         }
-        break;
       }
-      case 'top-right': {
-        // Handle width (right side)
-        newWidth = Math.max(300, initialWidth + deltaX);
-        if (windowRect.left + newWidth > contentRect.right) {
-          newWidth = contentRect.right - windowRect.left;
-        }
+    };
 
-        // Handle height (top side)
-        const proposedHeight = initialHeight - deltaY;
-        if (proposedHeight >= 200) {
-          const proposedY = windowRect.bottom - proposedHeight - contentRect.top;
-          // Check if we would hit the top boundary
-          if (proposedY < 0) {
-            newHeight = windowRect.bottom - contentRect.top;
-            newY = 0;
-          } else {
-            newHeight = proposedHeight;
-            newY = proposedY;
-          }
-        } else {
-          newHeight = 200;
-          newY = windowRect.bottom - 200 - contentRect.top;
-        }
-        break;
-      }
-      case 'bottom-right': {
-        // Handle width (right side)
-        newWidth = Math.max(300, initialWidth + deltaX);
-        if (windowRect.left + newWidth > contentRect.right) {
-          newWidth = contentRect.right - windowRect.left;
-        }
-
-        // Handle height (bottom side)
-        newHeight = Math.max(200, initialHeight + deltaY);
-        if (windowRect.top + newHeight > contentRect.bottom) {
-          newHeight = contentRect.bottom - windowRect.top;
-        }
-        break;
-      }
-      case 'bottom-left': {
-        // Handle width (left side)
-        const proposedWidth = initialWidth - deltaX;
-        if (proposedWidth >= 300) {
-          const proposedX = windowRect.right - proposedWidth - contentRect.left;
-          // Check if we would hit the left boundary
-          if (proposedX < 0) {
-            newWidth = windowRect.right - contentRect.left;
-            newX = 0;
-          } else {
-            newWidth = proposedWidth;
-            newX = proposedX;
-          }
-        } else {
-          newWidth = 300;
-          newX = windowRect.right - 300 - contentRect.left;
-        }
-
-        // Handle height (bottom side)
-        newHeight = Math.max(200, initialHeight + deltaY);
-        if (windowRect.top + newHeight > contentRect.bottom) {
-          newHeight = contentRect.bottom - windowRect.top;
-        }
-        break;
-      }
-    }
+    // Handle resize based on direction
+    if (resizeDirection.includes('left')) handleWidth(true);
+    if (resizeDirection.includes('right')) handleWidth(false);
+    if (resizeDirection.includes('top')) handleHeight(true);
+    if (resizeDirection.includes('bottom')) handleHeight(false);
 
     // Apply new dimensions and position
     window.style.width = `${newWidth}px`;

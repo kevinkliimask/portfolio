@@ -11,11 +11,11 @@ if (!fs.existsSync(distPath)) {
 
 // Copy all static assets to dist
 const staticAssets = [
+  'favicon.ico',
   'index.html',
   'index.js',
   'stars.css',
-  'cv-kevin-kliimask.pdf',
-  'favicon.ico',
+  'window-controls.js',
 ];
 
 // Copy assets folder

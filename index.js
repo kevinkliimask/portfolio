@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
   //
   document.getElementById('download').addEventListener('click', function () {
     const link = document.createElement('a');
-    link.href = 'cv-kevin-kliimask.pdf';
+    link.href = 'assets/cv-kevin-kliimask.pdf';
     link.download = 'cv-kevin-kliimask.pdf';
     link.click();
   });
