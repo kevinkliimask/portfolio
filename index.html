@@ -44,7 +44,8 @@
       }
 
       .content {
-        height: calc(100% - 23px);
+        height: calc(100vh - 23px);
+        overflow: hidden;
       }
 
       .window {
@@ -66,12 +67,13 @@
       .taskbar {
         background-image: url(assets/xptaskbar.gif);
         background-repeat: repeat-x;
-        width: 100%;
-        margin-top: auto;
-        position: relative;
         bottom: 0;
+        height: 23px;
         left: 0;
+        margin-top: auto;
+        position: fixed;
         right: 0;
+        width: 100%;
       }
 
       .start-btn {
@@ -184,7 +186,7 @@
       <span></span>
     </section>
     <section class="content">
-      <div class="window">
+      <div class="window" style="left: calc(50% - 17.5vw); top: calc(50% - 27.5vh);">
         <div class="title-bar" style="padding: 14px 4px">
           <span class="title-bar-text">klmsk.dev</span>
           <div class="title-bar-controls">

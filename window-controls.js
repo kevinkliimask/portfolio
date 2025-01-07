@@ -4,20 +4,20 @@ function initializeWindowControls(window, titleBar, content) {
   let resizeDirection = null;
   let initialX;
   let initialY;
-  let xOffset = 0;
-  let yOffset = 0;
+  let xOffset;
+  let yOffset;
   let initialWidth;
   let initialHeight;
 
-  // Center window initially
+  // Get initial position from current transform
+  const rect = window.getBoundingClientRect();
   const contentRect = content.getBoundingClientRect();
-  xOffset = (contentRect.width - window.offsetWidth) / 2;
-  yOffset = (contentRect.height - window.offsetHeight) / 2;
+  xOffset = rect.left - contentRect.left;
+  yOffset = rect.top - contentRect.top;
 
   window.style.position = 'absolute';
-  window.style.left = 0;
-  window.style.top = 0;
-  window.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+  window.style.left = `${xOffset}px`;
+  window.style.top = `${yOffset}px`;
 
   // Add drag event listeners
   titleBar.addEventListener('mousedown', dragStart);
@@ -71,9 +71,8 @@ function initializeWindowControls(window, titleBar, content) {
       xOffset = Math.min(Math.max(newX, minX), maxX);
       yOffset = Math.min(Math.max(newY, minY), maxY);
 
-      window.style.left = 0;
-      window.style.top = 0;
-      window.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+      window.style.left = `${xOffset}px`;
+      window.style.top = `${yOffset}px`;
     }
   }
 
@@ -169,7 +168,8 @@ function initializeWindowControls(window, titleBar, content) {
     // Apply new dimensions and position
     window.style.width = `${newWidth}px`;
     window.style.height = `${newHeight}px`;
-    window.style.transform = `translate(${newX}px, ${newY}px)`;
+    window.style.left = `${newX}px`;
+    window.style.top = `${newY}px`;
 
     // Update offsets
     xOffset = newX;
