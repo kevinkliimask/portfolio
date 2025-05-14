@@ -16,7 +16,6 @@ const staticAssets = [
   'index.js',
   'stars.css',
   'window-controls.js',
-  '_redirects',
 ];
 
 // Copy assets folder
@@ -69,7 +68,7 @@ routes.forEach(route => {
           
           // Deselect other tabs
           document.querySelectorAll('button[role="tab"]').forEach(btn => {
-            if (btn !== tabButton) {
+            if (btn.getAttribute('aria-controls') !== '${route}') {
               btn.setAttribute('aria-selected', 'false');
             }
           });
