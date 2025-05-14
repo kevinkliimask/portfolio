@@ -16,6 +16,7 @@ const staticAssets = [
   'index.js',
   'stars.css',
   'window-controls.js',
+  '_redirects',
 ];
 
 // Copy assets folder
